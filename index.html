@@ -16,6 +16,7 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
 window.SITE_MODE=true;
+window.COACH_API="https://script.google.com/macros/s/AKfycbytVBkOq7me1Am1xNS7y9dNBIICM7PR5-6Rr1jKXx_kRboztdbb_lVdevimoNM5eZ3g/exec";
 (function(){var U="https://script.google.com/macros/s/AKfycbytVBkOq7me1Am1xNS7y9dNBIICM7PR5-6Rr1jKXx_kRboztdbb_lVdevimoNM5eZ3g/exec";function ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||"null");localStorage.setItem(k,JSON.stringify(v));}catch(e){return null;}}
 var cached=ls("tpv_jopox");if(cached&&cached.t)window.__JOPOX_LIVE=cached;
 if(!U){window.__boot=Promise.resolve();return;}
@@ -160,7 +161,44 @@ a.rpe:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 .rv-done{border-color:var(--pitch)}
 .rv-back{font:inherit;background:none;border:0;color:var(--pitch);font-weight:600;cursor:pointer;padding:0;align-self:flex-start}
 #rvComment{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg);color:var(--fg)}
-.rv-sess button:focus-visible,.rv-scale button:focus-visible,.rv-nums button:focus-visible,.rv-send:focus-visible,.rv-back:focus-visible{outline:2px solid var(--pitch);outline-offset:2px}
+.cv-seg button:focus-visible,.cv-btn:focus-visible,.cv-link:focus-visible,.rv-sess button:focus-visible,.rv-scale button:focus-visible,.rv-nums button:focus-visible,.rv-send:focus-visible,.rv-back:focus-visible{outline:2px solid var(--pitch);outline-offset:2px}
+/* Coach view */
+.wrap.coachmode>*:not(header):not(#coachView){display:none!important}
+.wrap.coachmode header p{display:none}
+#coachView{display:flex;flex-direction:column;gap:16px}
+.cv-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cv-seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.cv-seg button{font:inherit;font-weight:600;font-size:.85rem;background:var(--surface);color:var(--fg);border:0;padding:6px 13px;cursor:pointer}
+.cv-seg button[aria-pressed="true"]{background:var(--pitch);color:var(--surface)}
+.cv-btn{font:inherit;font-weight:600;font-size:.85rem;background:none;border:1px solid var(--line);color:var(--pitch);border-radius:999px;padding:6px 13px;cursor:pointer}
+.cv-muted{font-size:.82rem;color:var(--muted);margin:0}
+.cv-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.cv-tile{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.cv-tile b{display:block;font-family:var(--f-mono);font-size:1.4rem;line-height:1.1}
+.cv-tile span{font-size:.78rem;color:var(--muted)}
+.cv-hist{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;align-items:end;height:96px;margin-bottom:8px}
+.cv-hist div{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:2px;font-size:.7rem;color:var(--muted)}
+.cv-hist i{display:block;width:100%;border-radius:4px 4px 0 0;min-height:2px}
+.cv-hist em{font-style:normal;font-family:var(--f-mono)}
+.cv-miss{display:flex;flex-wrap:wrap;gap:6px}
+.cv-miss span{font-family:var(--f-mono);font-size:.85rem;border:1px solid var(--line);border-radius:999px;padding:2px 9px;background:var(--bg)}
+.cv-tw{overflow-x:auto}
+.cv-heat{border-collapse:collapse;font-size:.82rem;width:100%}
+.cv-heat th,.cv-heat td{padding:5px 6px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cv-heat th{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.cv-heat td:first-child,.cv-heat th:first-child{text-align:left;font-weight:600;position:sticky;left:0;background:var(--surface)}
+.cv-heat td.h{font-family:var(--f-mono);border-radius:4px}
+.cv-pill{display:inline-block;font-weight:700;border-radius:999px;padding:1px 8px;font-family:var(--f-mono)}
+.cv-sess{display:flex;flex-direction:column;gap:8px}
+.cv-row{display:grid;grid-template-columns:7.5em 1fr 2.6em;gap:8px;align-items:center;font-size:.82rem}
+.cv-row small{color:var(--muted);display:block;font-size:.72rem}
+.cv-track{position:relative;height:16px;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+.cv-band{position:absolute;top:0;bottom:0;background:var(--kevyt);opacity:.25;border-radius:6px}
+.cv-dot{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;border:2px solid var(--surface)}
+.cv-scale{display:grid;grid-template-columns:7.5em 1fr 2.6em;gap:8px;font-size:.68rem;color:var(--muted)}
+.cv-scale div{display:flex;justify-content:space-between}
+#cvCode{font:inherit;font-size:1.2rem;letter-spacing:.2em;text-transform:uppercase;width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);color:var(--fg)}
+.cv-link{font:inherit;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0;font-size:.85rem}
 </style>
 
 <div class="wrap">
@@ -170,6 +208,7 @@ a.rpe:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
   </header>
 
   <section id="rpeView" hidden aria-labelledby="rvTitle"></section>
+  <section id="coachView" hidden aria-labelledby="cvTitle"></section>
 
   <section class="next" id="nextCard" aria-live="polite"></section>
 
@@ -418,7 +457,92 @@ function renderRpe(){
     mark();setTimeout(()=>{RV.sent=true;renderRpe();window.scrollTo(0,0);},300);};
   $("rvBack").onclick=()=>{location.hash="";};
 }
+
+// ---- Coach view (vain sovellusversiossa) ----
+const COACH_API=window.COACH_API||"";
+const CV={data:null,team:LS("cvteam")||"",err:"",loading:false};
+const avg=a=>a.length?a.reduce((s,x)=>s+x,0)/a.length:null;
+const f1=n=>n==null?"–":n.toLocaleString("fi-FI",{minimumFractionDigits:1,maximumFractionDigits:1});
+const f0=n=>Math.round(n).toLocaleString("fi-FI");
+function cvTarget(date,kind){const wd=(pd(date).getUTCDay()+6)%7;if(kind==="Sali")return[5,6];if(kind!=="Kenttäharjoitus")return null;return wd===0?[5,6]:wd===3?[7,8]:wd===4?[3,4]:null;}
+function cvColor(r){return r==null?"var(--line)":r>=7?"var(--kova)":r>=4?"var(--keski)":"var(--kevyt)";}
+function cvFetch(code){CV.loading=true;CV.err="";renderCoach();
+  return fetch(COACH_API+"?k="+encodeURIComponent(code),{cache:"no-store"})
+    .then(r=>r.json()).then(j=>{CV.loading=false;if(j&&j.ok){LSset("cvcode",code);CV.data=j;}else{CV.data=null;if(j&&j.error==="locked")CV.err="Liian monta väärää yritystä. Kokeile tunnin päästä.";else{CV.err="Väärä koodi.";LSset("cvcode",null);}}renderCoach();})
+    .catch(()=>{CV.loading=false;CV.err="Yhteys valmentajanäkymän tietoihin ei toiminut. Tarkista verkkoyhteys ja yritä uudelleen.";renderCoach();});}
+function renderCoach(){
+  const v=$("coachView");
+  if(!COACH_API){v.innerHTML=`<div class="rv-card"><h2 class="rv-h" id="cvTitle">Valmentajat</h2><p class="cv-muted">Valmentajanäkymä toimii vain sovellusversiossa.</p><button class="rv-back" type="button" id="cvBack">‹ Viikkorytmiin</button></div>`;$("cvBack").onclick=()=>{location.hash="";};return;}
+  if(!CV.data){
+    v.innerHTML=`<div class="rv-card"><h2 class="rv-h" id="cvTitle">Valmentajat</h2>
+      <p class="cv-muted">Pelaajien RPE-vastaukset ja kuormitus. Anna valmentajakoodi, puhelin muistaa sen.</p>
+      <label class="rv-step" for="cvCode">Valmentajakoodi</label>
+      <input id="cvCode" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" maxlength="12" placeholder="••••••">
+      ${CV.err?`<p class="cv-muted" style="color:var(--kova)">${CV.err}</p>`:""}
+      <button class="rv-send" type="button" id="cvGo" style="border:0;cursor:pointer;font:inherit;font-weight:700">${CV.loading?"Haetaan…":"Avaa"}</button>
+      <button class="rv-back" type="button" id="cvBack">‹ Viikkorytmiin</button></div>`;
+    const go=()=>{const c=$("cvCode").value.trim().toUpperCase();if(c)cvFetch(c);};
+    $("cvGo").onclick=go;$("cvCode").onkeydown=e=>{if(e.key==="Enter")go();};$("cvBack").onclick=()=>{location.hash="";};
+    const saved=LS("cvcode");if(saved&&!CV.loading&&!CV.err)cvFetch(saved);
+    return;}
+  const all=CV.data.rows.map(r=>({team:r[0],nr:r[1],date:r[2],kind:r[3],min:+r[4]||0,rpe:+r[5]})).filter(r=>/^\d{4}-\d\d-\d\d$/.test(r.date));
+  const rows=all.filter(r=>!CV.team||r.team===CV.team);
+  const teams=CV.team?[CV.team]:["Edustus","N2"];
+  // latest session per team
+  const latestBlocks=teams.map(tm=>{const tr=all.filter(r=>r.team===tm);if(!tr.length)return"";
+    const last=tr.reduce((m,r)=>r.date>m.date||(r.date===m.date&&r.kind>m.kind)?r:m,tr[0]);
+    const ses=tr.filter(r=>r.date===last.date&&r.kind===last.kind);
+    const act=[...new Set(tr.filter(r=>r.date>add(T,-28)).map(r=>r.nr))];
+    const ans=new Set(ses.map(r=>r.nr));const miss=act.filter(n=>!ans.has(n)).sort((a,b)=>a-b);
+    const a=avg(ses.map(r=>r.rpe));const tg=cvTarget(last.date,last.kind);
+    const hist=Array.from({length:11},(_,k)=>ses.filter(r=>r.rpe===k).length);const hm=Math.max(1,...hist);
+    return `<div class="rv-card"><div class="rv-step">${tm} · viimeisin</div>
+      <p class="rv-sum"><strong>${wdOf(last.date)} ${short(last.date)} – ${last.kind}</strong></p>
+      <div class="cv-tiles"><div class="cv-tile"><b>${ses.length}/${act.length}</b><span>vastannut / aktiiviset</span></div>
+        <div class="cv-tile"><b style="color:${cvColor(a)}">${f1(a)}</b><span>RPE keskimäärin</span></div>
+        <div class="cv-tile"><b>${tg?tg.join("–"):"–"}</b><span>tavoite</span></div></div>
+      <div class="cv-hist" aria-label="RPE-jakauma">${hist.map((c,k)=>`<div><em>${c||""}</em><i style="height:${c/hm*70}px;background:${cvColor(k)}"></i>${k}</div>`).join("")}</div>
+      <div class="rv-step">Vastaamatta (${miss.length})</div>
+      ${miss.length?`<div class="cv-miss">${miss.map(n=>`<span>#${n}</span>`).join("")}</div>`:`<p class="cv-muted">Kaikki aktiiviset vastasivat.</p>`}
+      <p class="cv-muted">Aktiivinen = vastannut ainakin kerran 28 päivän aikana.</p></div>`;}).join("");
+  // heatmap
+  const wk0=mondayOf(T);const weeks=[];for(let i=5;i>=0;i--)weeks.push(add(wk0,-7*i));
+  const byP={};rows.forEach(r=>{const k=r.team+"|"+r.nr;(byP[k]=byP[k]||[]).push(r);});
+  const keys=Object.keys(byP).sort((a,b)=>{const[ta,na]=a.split("|"),[tb,nb]=b.split("|");return ta.localeCompare(tb)||(+na-+nb);});
+  const first=all.reduce((m,r)=>r.date<m?r.date:m,"9999-12-31");const enough=(pd(T)-pd(first))/864e5>=20;
+  const grid=keys.map(k=>{const rs=byP[k];const wl=weeks.map(w=>rs.filter(r=>r.date>=w&&r.date<=add(w,6)).reduce((s,r)=>s+r.min*r.rpe,0));
+    const ac=rs.filter(r=>r.date>add(T,-7)&&r.date<=T).reduce((s,r)=>s+r.min*r.rpe,0);const ch=rs.filter(r=>r.date>add(T,-28)&&r.date<=T).reduce((s,r)=>s+r.min*r.rpe,0)/4;
+    return {k,wl,ratio:enough&&ch>0?ac/ch:null};});
+  const mx=Math.max(1,...grid.flatMap(g=>g.wl));
+  const rc=x=>x==null?"":x>1.5?"var(--kova)":x>1.3?"var(--keski)":x<0.8?"var(--lepo)":"var(--kevyt)";
+  const heat=grid.length?`<div class="cv-tw"><table class="cv-heat"><thead><tr><th>Pelaaja</th>${weeks.map(w=>`<th>Vk ${isoWeek(w)}</th>`).join("")}<th>Suhde</th></tr></thead><tbody>${grid.map(g=>{const[t,n]=g.k.split("|");
+      return `<tr><td>${CV.team?"":t==="Edustus"?"E ":"N2 "}#${n}</td>${g.wl.map(x=>`<td class="h" style="background:${x?`color-mix(in srgb, var(--kova) ${Math.round(12+x/mx*70)}%, transparent)`:"transparent"}">${x?f0(x):"·"}</td>`).join("")}<td>${g.ratio==null?"–":`<span class="cv-pill" style="background:${rc(g.ratio)};color:#fff">${g.ratio.toLocaleString("fi-FI",{minimumFractionDigits:2,maximumFractionDigits:2})}</span>`}</td></tr>`;}).join("")}</tbody></table></div>`:`<p class="cv-muted">Ei vastauksia.</p>`;
+  // sessions
+  const byS={};rows.forEach(r=>{const k=r.date+"|"+r.kind;(byS[k]=byS[k]||[]).push(r);});
+  const sk=Object.keys(byS).sort().reverse().slice(0,12);
+  const sess=sk.map(k=>{const rs=byS[k];const[d,kind]=k.split("|");const a=avg(rs.map(r=>r.rpe));const tg=cvTarget(d,kind);
+    return `<div class="cv-row"><div>${wdOf(d)} ${short(d)}<small>${kind}</small></div><div class="cv-track">${tg?`<span class="cv-band" style="left:${tg[0]*10}%;width:${(tg[1]-tg[0])*10}%"></span>`:""}<span class="cv-dot" style="left:${a*10}%;background:${cvColor(a)}"></span></div><div style="font-family:var(--f-mono);text-align:right">${f1(a)}<small>n=${rs.length}</small></div></div>`;}).join("");
+  v.innerHTML=`<div class="rv-card"><h2 class="rv-h" id="cvTitle">Valmentajat: RPE</h2>
+    <div class="cv-bar"><div class="cv-seg" role="group" aria-label="Joukkue">${[["","Kaikki"],["Edustus","Edustus"],["N2","N2"]].map(([t,l])=>`<button type="button" id="cvT${l}" data-t="${t}" aria-pressed="${CV.team===t}">${l}</button>`).join("")}</div>
+      <button class="cv-btn" type="button" id="cvRefresh">${CV.loading?"Haetaan…":"Päivitä"}</button></div>
+    <p class="cv-muted">Haettu ${CV.data.upd} · ${all.length} vastausta. Kommentit näkyvät vain vastaustaulukossa.</p></div>
+    ${latestBlocks}
+    <div class="rv-card"><div class="rv-step">Viikkokuorma (RPE × min)</div>${heat}
+      <p class="cv-muted">Suhde = 7 päivän kuorma / 28 päivän viikkokeskiarvo, näkyy kun dataa on 3 viikolta. Punainen yli 1,5, oranssi yli 1,3, harmaa alle 0,8.</p></div>
+    <div class="rv-card"><div class="rv-step">Harjoitukset: koettu ja tavoite</div>
+      <div class="cv-scale"><span></span><div><span>0</span><span>5</span><span>10</span></div><span></span></div>
+      <div class="cv-sess">${sess||`<p class="cv-muted">Ei vastauksia.</p>`}</div>
+      <p class="cv-muted">Piste = keskimääräinen RPE, vihreä alue = suunnitelman tavoite.</p></div>
+    <button class="cv-link" type="button" id="cvLogout">Unohda koodi tältä puhelimelta</button>
+    <button class="rv-back" type="button" id="cvBack">‹ Viikkorytmiin</button>`;
+  v.querySelectorAll(".cv-seg button").forEach(b=>b.onclick=()=>{CV.team=b.dataset.t;LSset("cvteam",CV.team);renderCoach();});
+  $("cvRefresh").onclick=()=>{const c=LS("cvcode");if(c)cvFetch(c);};
+  $("cvLogout").onclick=()=>{LSset("cvcode",null);CV.data=null;CV.err="";renderCoach();};
+  $("cvBack").onclick=()=>{location.hash="";};
+}
+if(window.SITE_MODE){const f=document.createElement("p");f.className="cv-muted";f.style.textAlign="center";f.innerHTML='<a href="#valmentajat" style="color:var(--muted)">Valmentajat</a>';document.querySelector(".wrap").appendChild(f);}
 function route(){const hsh=location.hash.replace(/^#/,"");const m=hsh.match(/^rpe(?:-(\d{4}-\d{2}-\d{2}))?$/);const on=!!m;
+  const cv=hsh==="valmentajat";document.querySelector(".wrap").classList.toggle("coachmode",cv);$("coachView").hidden=!cv;if(cv){renderCoach();window.scrollTo(0,0);}
   document.querySelector(".wrap").classList.toggle("rpemode",on);$("rpeView").hidden=!on;
   if(on){RV.sent=false;if(m[1]){const x=rvSessions().filter(s=>s.date===m[1]);if(x.length)RV.sess=x[x.length-1];}renderRpe();window.scrollTo(0,0);}}
 window.addEventListener("hashchange",route);route();
